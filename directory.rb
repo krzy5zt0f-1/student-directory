@@ -16,10 +16,10 @@ puts "Norman Bates"
 
 # finally, we print the total number of students
 
-print "Over all, we have"
+print "Over all, we have "
 
 # it's important that print() doesn't add new line characters
 
 print 11
 
-puts "great students"
+puts " great students"
