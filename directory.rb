@@ -12,11 +12,20 @@ students = [
   "Joffrey Baratheon",
   "Norman Bates"
 ]
-students_count = students.size
- # The intro
-puts "The students of Villains Academy"
-puts "-------------"
-# iterate through the students array
-students.each { |x| puts x }
-# finally, we print the total number of students
-print "Over all, we have #{students_count} great students"
+ # keep outputs as methods
+def print_header
+  puts "The students of Villains Academy"
+  puts "-------------"
+end
+
+def print(names)
+  names.each { |x| puts x }
+end
+
+def print_footer(names)
+  puts "Over all, we have #{names.size} great students"
+end
+#nothing happens until we call the methods
+print_header
+print(students)
+print_footer(students)
