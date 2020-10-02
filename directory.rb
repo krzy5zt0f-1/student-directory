@@ -19,7 +19,7 @@ def print_header
 end
 
 def print(names)
-  names.each { |x| puts "#{x[:name]} (#{x[:cohort]})" }
+  names.each { |x| puts "#{x[:name]} (#{x[:cohort]} cohort)" }
 end
 
 def print_footer(names)
