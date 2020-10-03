@@ -24,7 +24,7 @@ def print_header
 end
 
 def print(names)
- names.each { |x| puts "#{x[:name]} (#{x[:cohort]} cohort)" }
+ names.each.with_index(1) { |x, index| puts "#{index}. #{x[:name]} (#{x[:cohort]} cohort)" }
 end
 
 def print_footer(names)
