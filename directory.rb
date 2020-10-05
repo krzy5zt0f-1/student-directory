@@ -1,4 +1,3 @@
-# input_users method makes it great to eliminate hard-coded student data
 def input_students
  puts "Please enter the names of students"
  puts "To finish, just hit return twice"
@@ -8,7 +7,8 @@ def input_students
  # while the name is not empty, repeat this code
  while !name.empty? do
    #add student hash to the array
-   students << { name: name, cohort: "november"}
+   students << { name: name, cohort: "november", hobby: "being bad",
+                  country_of_origin: "land of badness"}
    puts "Now we have #{students.size} students"
    name = gets.chomp.capitalize
  end
