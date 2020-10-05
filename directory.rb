@@ -51,14 +51,14 @@ def loop_for_print(arr, control)
     bin << "-------------".center(40)
     i = 0
     while i != arr.size
-      bin << "    #{i + 1}. #{arr[i][:name]} (#{arr[i][:cohort]} cohort)"
+      bin << "    #{i + 1}. #{arr[i][:name]}; #{arr[i][:cohort]} cohort"
       i += 1
     end
   else
     bin << "The students of Villains Academy with names starting with letter `#{control}`".center(40)
     bin << "-------------".center(40)
     for i in 1..arr.size
-      bin << "    #{i}. #{arr[i - 1][:name]} (#{arr[i - 1][:cohort]} cohort)" if arr[i - 1][:name][0] == control
+      bin << "    #{i}. #{arr[i - 1][:name]}; #{arr[i - 1][:cohort]} cohort" if arr[i - 1][:name][0] == control
     end
   end
   bin
@@ -95,9 +95,8 @@ def print(names)
   # option to print names of students of lenghts up to 12 characters
   puts "Would you like to view only students with names shorter than 12 characters? [y/n]".center(40)
   input = move
-  input == "y" ? names_s = loop_for_print(names,letter).drop(2).select { |x| x.length > 37} : names_s = []
+  input == "y" ? names_s = loop_for_print(names,letter).drop(2).select { |x| x[x.index(".")..x.index(";")].length > 15} : names_s = []
   puts (loop_for_print(names, letter) - names_s)
-
 
 end
 
