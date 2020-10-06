@@ -20,7 +20,7 @@ months = {
  puts " and select any arbitrarry cohort".center(40)
  # create an empty arrays for students storage
  students = []
- name = gets.chomp.capitalize
+ name = gets.strip.capitalize
  # asks for the cohort of a student
   puts "To choose the cohort".center(40)
   puts "of the student inlucde it as an integer,".center(40)
@@ -29,7 +29,7 @@ months = {
  # while the name is not empty, repeat this code
  while !name.empty? do
    #add student hash to the array
-   students << { name: name, cohort: months[month], hobby: "being bad",
+   students << { name: name, cohort:month, hobby: "being bad",
                   country_of_origin: "land of badness"}
    puts "Now we have #{students.size} students".center(40)
    name = gets.chomp.capitalize
@@ -37,7 +37,10 @@ months = {
    month = from1to12
  end
  # return the array of students
- students
+ # sorted studenta by ochorts
+ sorted_by_no = students.sort_by { |x| x[:cohort] }
+ # making sure the months print as months, not numbers
+ output = sorted_by_no.each { |x| x[:cohort] = months[x[:cohort]] }
 
 end
 
@@ -74,7 +77,7 @@ def move
   end
   @input
 end
- # askas for correct cohort input
+ # asks for correct cohort input
 def from1to12
   a = Array(1..12)
   loop do
@@ -85,9 +88,34 @@ def from1to12
   end
   @number
 end
+# version for cohort filtering at the end
+def from1to12_100
+  a = Array(1..12)
+  a << 100
+  loop do
+    @number = gets.strip.to_i
+    if a.include?(@number)
+      break
+    end
+  end
+  @number
+end
 
 def print(names)
-
+months = {
+  1 => "January",
+  2 => "February",
+  3 => "March",
+  4 => "April",
+  5 => "May",
+  6 => "June",
+  7 => "July",
+  8 => "August",
+  9 => "September",
+  10 => "October",
+  11 => "Novemebr",
+  12 => "Decemebr",
+}
   puts "Chose the first letter of names of students to print".center(40)
   puts "To print the whole list just hit return".center(40)
   input = gets.strip.upcase
@@ -96,8 +124,18 @@ def print(names)
   puts "Would you like to view only students with names shorter than 12 characters? [y/n]".center(40)
   input = move
   input == "y" ? names_s = loop_for_print(names,letter).drop(2).select { |x| x[x.index(".")..x.index(";")].length > 15} : names_s = []
-  puts (loop_for_print(names, letter) - names_s)
-
+  output = loop_for_print(names, letter) - names_s
+  puts "To chose students only from given cohort,".center(40)
+  puts "type in a number of month =, i.e. 3 -> March.".center(40)
+  puts "To print full list input `100`"
+ # option to select specific cohort
+ input = from1to12_100
+ if input != 100
+  to_take_away = output.drop(2).select! { |x| !x[x.index(";")..-7].include?(months[input])}
+ else
+  to_take_away = []
+ end
+puts output - to_take_away
 end
 
 def print_footer(names)
