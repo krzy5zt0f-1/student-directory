@@ -139,7 +139,7 @@ puts output - to_take_away
 end
 
 def print_footer(names)
- puts "Over all, we have #{names.size} great students".center(40)
+ puts names.size == 1 ?"Over all, we have #{names.size} great student".center(40) : "Over all, we have #{names.size} great students".center(40)
 end
 #nothing happens until we call the methods
 students = input_students
