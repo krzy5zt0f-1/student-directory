@@ -116,6 +116,7 @@ months = {
   11 => "Novemebr",
   12 => "Decemebr",
 }
+if names.size != 0
   puts "Chose the first letter of names of students to print".center(40)
   puts "To print the whole list just hit return".center(40)
   input = gets.strip.upcase
@@ -131,15 +132,22 @@ months = {
  # option to select specific cohort
  input = from1to12_100
  if input != 100
-  to_take_away = output.drop(2).select! { |x| !x[x.index(";")..-7].include?(months[input])}
+  to_take_away = output.drop(2).select { |x| !x[x.index(";")..-7].include?(months[input])}
  else
   to_take_away = []
  end
 puts output - to_take_away
+else
+
+end
 end
 
 def print_footer(names)
+  if names.size != 0
  puts names.size == 1 ?"Over all, we have #{names.size} great student".center(40) : "Over all, we have #{names.size} great students".center(40)
+  else
+
+  end
 end
 #nothing happens until we call the methods
 students = input_students
