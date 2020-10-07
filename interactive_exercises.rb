@@ -93,9 +93,7 @@ def save_students(filename = "students.csv")
 end
 
 def load_students(filename = "students.csv")
-  file = File.open(filename, "r")
-  file.readlines.each { |line| name, cohort = line.chomp.split(','); ex1(name, cohort) }
-  file.close
+  File.read(filename).readlines.each { |line| name, cohort = line.chomp.split(','); ex1(name, cohort) }
 end
 
 def try_load_students
