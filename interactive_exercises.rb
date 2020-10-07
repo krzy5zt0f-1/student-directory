@@ -67,9 +67,7 @@ def print_header
 end
 
 def print_student_list
-  @students.each do |student|
-    puts "#{student[:name]} (#{student[:cohort]} cohort)"
-  end
+  @students.each { |student| puts "#{student[:name]} (#{student[:cohort]} cohort)" }
 end
 
 def print_footer
@@ -80,20 +78,15 @@ def save_students
   # open the file for writing
   file = File.open("students.csv", "w")
   # iterate over the array of students
-  @students.each do |student|
-    student_data = [student[:name], student[:cohort]]
-    csv_line = student_data.join(",")
-    file.puts csv_line
-  end
+  @students.each { |student| student_data = [student[:name], student[:cohort]];
+                                            csv_line = student_data.join(",");
+                                                          file.puts csv_line }
   file.close
 end
 
 def load_students(filename = "students.csv")
   file = File.open(filename, "r")
-  file.readlines.each do |line|
-  name, cohort = line.chomp.split(',')
-    ex1(name, cohort)
-  end
+  file.readlines.each { |line| name, cohort = line.chomp.split(','); ex1(name, cohort) }
   file.close
 end
 
