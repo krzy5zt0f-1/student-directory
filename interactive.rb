@@ -8,7 +8,7 @@ def input_students
   # while the name is not empty, repeat this code
   while !name.empty? do
   # add the student hash to the array
-  add_students
+  @students << {name: name, cohort: "november"}
   puts "Now we have #{@students.count} students"
   # get another name from the user
   name = STDIN.gets.chomp
@@ -81,7 +81,7 @@ def load_students(filename = "students.csv")
   # iterate over the file content
   file.readlines.each do |line|
     name, cohort = line.chomp.split(",")
-    add_students
+    @students << { name: name, cohort: cohort.to_sym}
   end
   file.close
 end
@@ -96,10 +96,6 @@ def try_load_students
     puts "Sorry, #{filename} does not exist"
     exit # quit the program
   end
-end
-# function to add hash to @students
-def add_students
-  @students << { name: name, cohort: cohort.to_sym}
 end
 
 def interactive_menu
