@@ -33,12 +33,14 @@ def process(selection)
     puts "To change file to which students are being saved, type it in"
     puts "To contniue with students.csv hit return"
     file = STDIN.gets.chomp
-    save_students(file); file.empty? ? x = "students.csv" : x = file; puts "Changes saved to #{x}"
+    file.empty? ? x = "students.csv" : x = file; puts "Changes saved to #{x}"
+    save_students(x)
   when "4"
     puts "To change file from which students are being loaded, type it in"
     puts "To contniue with students.csv hit return"
     file = STDIN.gets.chomp
-    load_students(file); file.empty? ? x = "students.csv" : x = file; puts "Student data successfully loaded from #{x}"
+    file.empty? ? x = "students.csv" : x = file; puts "Student data successfully loaded from #{x}"
+    load_students(x)
   else
     puts "I don't know what you meant, try again"
   end
