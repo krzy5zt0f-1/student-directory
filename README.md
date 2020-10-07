@@ -4,6 +4,6 @@
 
   ## How to use ##
 
-     ```shell
-     ruby dircetory.rb
+     ```
+     ruby interactive.rb
      ```
