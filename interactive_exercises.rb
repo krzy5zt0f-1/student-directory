@@ -1,3 +1,4 @@
+require 'csv'
 @students = [] # an empty array accessible to all methods
 # method to reduce repetiotion of
 # @students << {name: name, cohort: cohort.to_sym}
@@ -33,13 +34,13 @@ def process(selection)
     puts "To change file to which students are being saved, type it in"
     puts "To contniue with students.csv hit return"
     file = STDIN.gets.chomp
-    file.empty? ? x = "students.csv" : x = file; puts "Changes saved to #{x}"
+    file.empty? || File.exists?(file) == false ? x = "students.csv" : x = file; puts "Changes saved to #{x}"
     save_students(x)
   when "4"
     puts "To change file from which students are being loaded, type it in"
     puts "To contniue with students.csv hit return"
     file = STDIN.gets.chomp
-    file.empty? ? x = "students.csv" : x = file; puts "Student data successfully loaded from #{x}"
+    file.empty? || File.exists?(file) == false ? x = "students.csv" : x = file; puts "Student data successfully loaded from #{x}"
     load_students(x)
   else
     puts "I don't know what you meant, try again"
@@ -85,12 +86,13 @@ end
 def save_students(filename = "students.csv")
   # iterate over the array of students
   @students.each { |student| student_data = [student[:name], student[:cohort]];
-                                            csv_line = student_data.join(",");
-                                              File.write(filename, csv_line) }
+                                              CSV.open(filename, "wb") do |csv|
+                                                csv << student_data
+                                              end }
 end
 
 def load_students(filename = "students.csv")
-  File.foreach(filename) { |line| name, cohort = line.chomp.split(','); ex1(name, cohort) }
+  CSV.foreach(filename) { |line| name, cohort = line[0], line[1]; ex1(name, cohort) }
 end
 
 def try_load_students
