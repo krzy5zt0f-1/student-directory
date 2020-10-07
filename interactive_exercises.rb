@@ -30,9 +30,9 @@ def process(selection)
   when "9"
     exit # this will cause the program to terminate
   when "3"
-    save_students
+    save_students; puts "Changes saved to students.csv"
   when "4"
-    load_students
+    load_students; puts "Student data successfully loaded from students.cdv"
   else
     puts "I don't know what you meant, try again"
   end
@@ -93,10 +93,9 @@ end
 def try_load_students
   filename = ARGV.first# first argument from the command line
   if filename.nil? # if no file given load students.csv
-    load_students()
+    load_students(); puts "Loaded #{@students.count} from students.csv"
   elsif File.exists?(filename) # if it exists
-    load_students(filename)
-     puts "Loaded #{@students.count} from #{filename}"
+    load_students(filename); puts "Loaded #{@students.count} from #{filename}"
   else # if it doesn't exist
     puts "Sorry, #{filename} doesn't exist."
     exit # quit the program
