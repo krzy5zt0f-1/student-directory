@@ -37,14 +37,16 @@ def process(selection)
     puts "I don't know what you meant, try again"
   end
 end
-
-def input_students
+# def of info when input_students used
+def input_instructions
   puts "Please enter the names of the students"
   puts "To finish, just hit return twice"
-  # get the first name
-  name = STDIN.gets.chomp
-  # while the name is not empty, repeat this code
-  while !name.empty? do
+end
+
+def input_students
+  input_instructions
+  name = STDIN.gets.chomp # get the first name
+  while !name.empty? do # while the name is not empty, repeat this code
     # add the student hash to the array
     ex1(name, "november")
     puts "Now we have #{@students.count} students"
