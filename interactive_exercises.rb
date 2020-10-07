@@ -9,8 +9,8 @@ end
 def print_menu
   puts "1. Input the students"
   puts "2. Show the students"
-  puts "3. Save the list to students.csv"
-  puts "4. Load the list from students.csv"
+  puts "3. Save the list to a file"
+  puts "4. Load the list from a file"
   puts "9. Exit" # 9 because we'll be adding more items
 end
 
@@ -30,9 +30,15 @@ def process(selection)
   when "9"
     exit # this will cause the program to terminate
   when "3"
-    save_students; puts "Changes saved to students.csv"
+    puts "To change file to which students are being saved, type it in"
+    puts "To contniue with students.csv hit return"
+    file = STDIN.gets.chomp
+    save_students(file); file.empty? ? x = "students.csv" : x = file; puts "Changes saved to #{x}"
   when "4"
-    load_students; puts "Student data successfully loaded from students.cdv"
+    puts "To change file from which students are being loaded, type it in"
+    puts "To contniue with students.csv hit return"
+    file = STDIN.gets.chomp
+    load_students(file); file.empty? ? x = "students.csv" : x = file; puts "Student data successfully loaded from #{x}"
   else
     puts "I don't know what you meant, try again"
   end
@@ -74,9 +80,9 @@ def print_footer
   puts "Overall, we have #{@students.count} great students"
 end
 
-def save_students
+def save_students(filename = "students.csv")
   # open the file for writing
-  file = File.open("students.csv", "w")
+  file = File.open(filename, "w")
   # iterate over the array of students
   @students.each { |student| student_data = [student[:name], student[:cohort]];
                                             csv_line = student_data.join(",");
